@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm2Mart - Transactions</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .transactions {
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .transactions h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #2E8B57;
+        }
+        .offer {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .offer h3 {
+            font-size: 1.3em;
+            color: #333;
+        }
+        .offer p {
+            font-size: 1.1em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Farm2Mart</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="negotiation.html">Negotiate</a>
+            <a href="transactions.html">Transactions</a>
+        </nav>
+    </header>
+
+    <section class="transactions">
+        <h2>Submitted Offers</h2>
+        <div id="offersList"></div>
+    </section>
+
+    <footer>
+        <p>&copy; Farm2Mart-By Saravanan and Belton</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const offers = JSON.parse(localStorage.getItem('offers')) || [];
+            const offersList = document.getElementById('offersList');
+
+            if (offers.length === 0) {
+                offersList.innerHTML = '<p>No offers submitted yet.</p>';
+            } else {
+                offers.forEach(offer => {
+                    const offerDiv = document.createElement('div');
+                    offerDiv.className = 'offer';
+                    offerDiv.innerHTML = `
+                        <h3>Product: ${offer.product}</h3>
+                        <p>Quantity: ${offer.quantity} kg</p>
+                        <p>Price per kg: Rs.${offer.price}</p>
+                    `;
+                    offersList.appendChild(offerDiv);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

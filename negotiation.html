@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm2Mart - Negotiate</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .negotiation-form input[type="number"]::-webkit-inner-spin-button,
+        .negotiation-form input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .negotiation-form input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Farm2Mart</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="negotiation.html">Negotiate</a>
+            <a href="transactions.html">Transactions</a>
+        </nav>
+    </header>
+
+    <section class="negotiation-form">
+        <h2>Negotiate Prices</h2>
+        <form id="negotiationForm" onsubmit="handleFormSubmit(event)">
+            <label for="product">Product:</label>
+            <input type="text" id="product" name="product" required>
+
+            <label for="quantity">Quantity(kg):</label>
+            <input type="number" id="quantity" name="quantity" required>
+
+            <label for="price">Offer per kg (Rs.):</label>
+            <input type="number" id="price" name="price" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; Farm2Mart-By Saravanan and Belton</p>
+    </footer>
+
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const product = document.getElementById('product').value;
+            const quantity = document.getElementById('quantity').value;
+            const price = document.getElementById('price').value;
+
+            let offers = JSON.parse(localStorage.getItem('offers')) || [];
+            offers.push({ product, quantity, price });
+            localStorage.setItem('offers', JSON.stringify(offers));
+
+            window.location.href = 'confirmation.html';
+        }
+    </script>
+</body>
+</html>
